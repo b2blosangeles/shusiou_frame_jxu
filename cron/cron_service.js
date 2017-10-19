@@ -7,7 +7,7 @@ var root_path =  path.join(__dirname, '..');
 var LOG = require(root_path + '/package/log/log.js');
 var log = new LOG();
 
-var conf_file = root_path + '/site/cron/cron.json';
+var conf_file = root_path + '/site/cron_service/cron.json';
 
 fs.exists(conf_file, function(exists){
 	if(exists) {
@@ -16,7 +16,7 @@ fs.exists(conf_file, function(exists){
 			for (var i = 0; i < cron.length; i++) {
 				var f = function(v) {
 					return function() {
-						exec('cd ' + root_path + '/site/cron' + ' &&  node ' + v.script, function(error, stdout, stderr) {
+						exec('cd ' + root_path + '/site/cron_service' + ' &&  node ' + v.script, function(error, stdout, stderr) {
 							if (error) {
 								log.write("/var/log/shusiou_cron.log", 'cron::'+v.script,  JSON.stringify(error));
 							} else {
