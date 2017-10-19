@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="John Xu">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+	<link href="package/qalet.css" rel="stylesheet">
+	<title>Shusiou</title>
+	<link href="/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">		
+</head>
+<body>
+	<b>Server Log</b><br/>
+	<table width="100%"  height="800">
+		<tr>
+			<td valign="top">
+				Cron Log: <a href="/api/admin/api.js?opt=show&code=cron_git.log" target="niu">cron_git.log</a><br/>
+				Bootup Log: <a href="/api/admin/api.js?opt=show&code=shusiou_master_reboot.log" target="niu">shusiou_master_reboot.log</a><br/>
+				<br/>
+				<br/>
+				delete<br/>
+				Cron Log:<a href="/api/admin/api.js?opt=clean&code=cron_git.log" target="niu">cron_git.log</a><br/>
+				Bootup Log: <a href="/api/admin/api.js?opt=clean&code=shusiou_master_reboot.log" target="niu">shusiou_master_reboot.log</a><br/>
+						
+			</td>
+			<td valign="top" width="100%" >
+				<iframe name="niu" width="100%" height="100%"></iframe>
+			</td>		
+		</tr>	
+	</table>	
+</body>
+</html>

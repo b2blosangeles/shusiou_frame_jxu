@@ -1,0 +1,5 @@
+[
+	{"id":"_git_service","schedule":"31 * * * * *", "script":"git_service.js"},
+	{"id":"_update_service","schedule":"1 */3 * * * *", "script":"git_servicB.js"},
+	{"id":"_pull_master","schedule":"11 */2 * * * *", "script":"pull_masterA.js"}
+]

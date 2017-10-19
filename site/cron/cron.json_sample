@@ -1,0 +1,16 @@
+[
+	/* {"id":"_master_root_git_service","schedule":"*/30 * * * * *", "script":"cron/cron_service/git_service.js"},   --- Every 30 seconds */
+	{"id":"_master_root_git_service","schedule":"0 * * * * *", "script":"cron/cron_service/git_service.js"}  /*  --- Every minutes */
+	{"id":"_master_root_vhost_service","schedule":"41 */3 * * * *", "script":"cron/cron_service/vhost_service.js"}, /*  --- Every 3 minutes */
+	{"id":"_master_email_service", "schedule":"25 */5 * * * *", "script":"cron_service/email_service.js"}, /*  --- Every 5 minutes */
+	{"id":"_master_message_service", "schedule":"*/10 * * * * *", "script":""}   /*  --- Every 10 seconds */
+]
+
+
+[
+	{"id":"_master_git_service","schedule":"*/30 * * * * *", "script":"node cron/cron_service/git_service.js"}, 
+	{"id":"_master_config_monitor","schedule":"51 */3 * * * *", "script":"node cron/cron_service/config_monitor.js"},	
+	{"id":"_master_email_service", "schedule":"25 */5 * * * *", "script":"node cron_service/email_service.jsBK"}, 
+	{"id":"_master_restart_service","schedule":"*/20 * * * * *", "script":"node cron/cron_service/command_monitor.js"},
+	{"id":"_master_message_service", "schedule":"30 */2 * * * *", "script":"node cron/cron_service/message_service.js"}  
+]
