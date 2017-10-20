@@ -83,7 +83,25 @@
 			}
 			return address;
 		};		
-		
+		this.isIp(ip) {
+		    var arrIp = ip.split(".");
+		    if (arrIp.length !== 4) return "Invalid IP";
+		    for (let oct of arrIp) {
+			if ( isNaN(oct) || Number(oct) < 0 || Number(oct) > 255)
+			    return false;
+		    }
+		    return true;
+		};
+		this.whoami() {
+			var this = me;
+			var host = req.headers.host, ips = me.getServerIP();
+			if (me.isIp(host) && ips.indexOf(host) !== -1) {
+			    pkg.fs.writeFile('/var/whoami.data', host, function() {
+			      	
+			    });
+			}
+			res.send(JSON.stringify(ips));
+		}
 		this.load = function() {
 			var me = this, p = req.params[0];
 			var patt = new RegExp('/(api|checkip|package)/(.+|)', 'i');
@@ -94,7 +112,7 @@
 						me.runApi(v[2]);
 						break;
 					case 'checkip':
-						res.send(JSON.stringify(me.getServerIP()));
+						me.whoami();
 						break;	
 					case 'package':
 						me.sendPackage(v[2]);
