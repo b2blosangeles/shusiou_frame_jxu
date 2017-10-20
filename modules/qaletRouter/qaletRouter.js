@@ -84,6 +84,8 @@
 			return address;
 		};		
 		this.isIp(ip) {
+			return true;
+			/*
 		    var arrIp = ip.split(".");
 		    if (arrIp.length !== 4) return "Invalid IP";
 		    for (let oct of arrIp) {
@@ -91,6 +93,7 @@
 			    return false;
 		    }
 		    return true;
+		    */
 		};
 		this.whoami() {
 			var this = me;
