@@ -96,7 +96,7 @@
 			var me = this;
 			var host = req.headers.host, ips = me.getServerIP();
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
-			    pkg.fs.readFile('/var/whoami.data', 'utf8', function(err,data) {
+			    pkg.fs.readFile('/var/_qalet_whoami.data', 'utf8', function(err,data) {
 			    	if ((err) || data != host) {
 					pkg.fs.writeFile('/var/_qalet_whoami.data', host, function() {});	
 				} 
