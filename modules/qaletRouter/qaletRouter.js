@@ -97,7 +97,12 @@
 			var host = req.headers.host, ips = me.getServerIP();
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
 			    pkg.fs.readFile('/var/whoami.data', 'utf8', function(err,data) {
-			    	res.send(err.message);  	
+			    	if ((err) || data != host) {
+					pkg.fs.writeFile('/var/whoami.data', host, function() {
+						res.send(host + '--' + data);
+					});	
+				}
+					 	
 			   
 			    });	
 				/*
