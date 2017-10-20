@@ -83,9 +83,7 @@
 			}
 			return address;
 		};		
-		this.isIp(ip) {
-			return true;
-			/*
+		this.isIp = function(ip) {
 		    var arrIp = ip.split(".");
 		    if (arrIp.length !== 4) return "Invalid IP";
 		    for (let oct of arrIp) {
@@ -93,9 +91,8 @@
 			    return false;
 		    }
 		    return true;
-		    */
 		};
-		this.whoami() {
+		this.whoami = function() {
 			var this = me;
 			var host = req.headers.host, ips = me.getServerIP();
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
