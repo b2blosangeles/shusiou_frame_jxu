@@ -96,11 +96,16 @@
 			var this = me;
 			var host = req.headers.host, ips = me.getServerIP();
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
+			    pkg.fs.readFile('/var/whoami.data', 'utf8', function(err,data) {
+			    	res.send(data);  	
+			   
+			    });	
+				/*
 			    pkg.fs.writeFile('/var/whoami.data', host, function() {
 			      	
-			    });
+			    });*/
 			}
-			res.send(JSON.stringify(ips));
+		//	res.send(JSON.stringify(ips));
 		}
 		this.load = function() {
 			var me = this, p = req.params[0];
