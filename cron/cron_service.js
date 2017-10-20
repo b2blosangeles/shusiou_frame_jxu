@@ -21,9 +21,9 @@ fs.exists(conf_file, function(exists){
 								log.write("/var/log/shusiou_cron.log", 'cron::'+v.script,  JSON.stringify(error));
 							} else {
 								if (!stderr) {
-									log.write("/var/log/shusiou_cron.log", 'cron::'+v.script, JSON.stringify({status:'success', id:v.id, message:stdout}));
+									log.write("/var/log/shusiou_cron.log", 'cron::'+v.script, JSON.stringify({status:'success', id:v.id, message:log.transformText(stdout)}));
 								} else {
-									log.write("/var/log/shusiou_cron.log", 'cron::'+v.script, JSON.stringify({status:'error', id:v.id, message:stderr}));
+									log.write("/var/log/shusiou_cron.log", 'cron::'+v.script, JSON.stringify({status:'error', id:v.id, message:log.transformText(stderr)}));
 								}
 							}	
 						});
