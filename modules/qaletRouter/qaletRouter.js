@@ -92,27 +92,17 @@
 		    }
 		    return true;
 		};
-		this.whoami = function() {
+		this.setWhoami = function() {
 			var me = this;
 			var host = req.headers.host, ips = me.getServerIP();
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
 			    pkg.fs.readFile('/var/whoami.data', 'utf8', function(err,data) {
 			    	if ((err) || data != host) {
-					pkg.fs.writeFile('/var/whoami.data', host, function() {
-						res.send(host + '--' + data);
-					});	
-				} else {
-					res.send(host + '==');
-				}
-					 	
-			   
+					pkg.fs.writeFile('/var/whoami.data', host, function() {});	
+				} 
 			    });	
-				/*
-			    pkg.fs.writeFile('/var/whoami.data', host, function() {
-			      	
-			    });*/
 			}
-		//	res.send(JSON.stringify(ips));
+			res.send(JSON.stringify(ips));
 		}
 		this.load = function() {
 			var me = this, p = req.params[0];
@@ -124,7 +114,7 @@
 						me.runApi(v[2]);
 						break;
 					case 'checkip':
-						me.whoami();
+						me.setWhoami();
 						break;	
 					case 'package':
 						me.sendPackage(v[2]);
