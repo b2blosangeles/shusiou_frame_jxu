@@ -101,6 +101,8 @@
 					pkg.fs.writeFile('/var/whoami.data', host, function() {
 						res.send(host + '--' + data);
 					});	
+				} else {
+					res.send(host + '==');
 				}
 					 	
 			   
