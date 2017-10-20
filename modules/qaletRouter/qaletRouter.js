@@ -85,7 +85,7 @@
 		};		
 		this.isIp = function(ip) {
 		    var arrIp = ip.split(".");
-		    if (arrIp.length !== 4) return "Invalid IP";
+		    if (arrIp.length !== 4) return false;
 		    for (let oct of arrIp) {
 			if ( isNaN(oct) || Number(oct) < 0 || Number(oct) > 255)
 			    return false;
@@ -98,7 +98,7 @@
 			if (me.isIp(host) && ips.indexOf(host) !== -1) {
 			    pkg.fs.readFile('/var/whoami.data', 'utf8', function(err,data) {
 			    	if ((err) || data != host) {
-					pkg.fs.writeFile('/var/whoami.data', host, function() {});	
+					pkg.fs.writeFile('/var/_qalet_whoami.data', host, function() {});	
 				} 
 			    });	
 			}
