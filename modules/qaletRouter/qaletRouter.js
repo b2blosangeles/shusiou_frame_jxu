@@ -35,17 +35,13 @@
 			var me = this;
 			var p = env.root_path + '/site/api/' + v;
 			// var patt = new RegExp('.js$', 'i');
-			/*
-			if (!patt.test(v)) {
-				me.send404(v);
-				return true;
-			}
-			*/
 			var patt = new RegExp('.api$', 'i');
 			if (!patt.test(v)) {
 				me.send404(v);
 				return true;
-			}			
+			}
+			p = p.replace(patt,'.js');
+			
 			pkg.fs.exists(p, function(exists) {
 				if (exists) {
 					pkg.fs.stat(p, function(err, stats) {
