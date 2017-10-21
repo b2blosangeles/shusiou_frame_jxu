@@ -35,11 +35,12 @@
 			var me = this;
 			var p = env.root_path + '/site/api/' + v;
 			var patt = new RegExp('.js$', 'i');
+			/*
 			if (!patt.test(v)) {
 				me.send404(v);
 				return true;
 			}
-			
+			*/
 			pkg.fs.exists(p, function(exists) {
 				if (exists) {
 					pkg.fs.stat(p, function(err, stats) {
