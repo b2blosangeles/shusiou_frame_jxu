@@ -57,6 +57,13 @@ app.get(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
+app.post(/(.+)$/i, function (req, res) {
+	delete require.cache[__dirname + '/modules/qaletRouter/qaletRouter.js'];
+	var router  = require(__dirname + '/modules/qaletRouter/qaletRouter.js');
+	var R = new router(pkg, env, req, res);
+	R.load();
+});
+
 
 var server = require('http').createServer(app);
 server.listen(port, function() {
