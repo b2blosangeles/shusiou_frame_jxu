@@ -352,14 +352,14 @@
 										qaletBabel = new Babel();
 									}									
 									pkg.fs.stat(fn, function(err, s){
-										if (err) {
-											cbk('console.log("'+err.message.replace('"', '')+'");');
-										} else {
+									//	if (err) {
+									//		cbk('console.log("'+err.message.replace('"', '')+'");');
+									//	} else {
 											me.pkCache.qaletBabel(fn, s.mtime.getTime(),
 												cbk,
 												qaletBabel
 											);													
-										}   
+									//	}   
 										
 									});									
 										
