@@ -128,8 +128,7 @@
 				if (p.match(/\/$/i)) {
 					p+='index.html';
 				}
-				me.send(p);
-				// me.sendFile(p);
+				me.sendFile(p);
 			}
 		};	
 	
