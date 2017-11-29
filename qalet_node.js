@@ -11,7 +11,7 @@ var log = new LOG();
 		
 var env = {
 	root_path:__dirname,
-	config:'/var/qalet_config',
+	config_path:'/var/qalet_config',
 	site_path:__dirname + '/site'
 };			
 var pkg = {
