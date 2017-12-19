@@ -72,20 +72,20 @@ app.post(/(.+)$/i, function (req, res) {
 
 	var certs = {
 		"qalet.com": {
-			key: pkg.fs.readFileSync('./cert/www_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('./cert/www_qalet_com_crt.pem') 
+			key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
 		},  		
 		"www.qalet.com": {
-			key: pkg.fs.readFileSync('./cert/www_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('./cert/www_qalet_com_crt.pem') 
+			key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
 		},
 		"cdn.qalet.com": {
-			key: pkg.fs.readFileSync('./cert/cdn_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('./cert/cdn_qalet_com_crt.pem') 
+			key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
 		},			
 		"_default": {
-			key: pkg.fs.readFileSync('./cert/cdn_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('./cert/cdn_qalet_com_crt.pem') 
+			key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
 		} 
 	};
 	
