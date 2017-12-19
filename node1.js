@@ -70,7 +70,28 @@ var cert_folder = '/var/cert/sites/';
 pkg.fs.exists(cert_folder, function(exists) {
     if (exists) {
 	pkg.fs.readdir(cert_folder, function(err, cert_files) {
-		console.log(cert_files);
+		var certs = {};
+		for (var i = 0; i < cert_files.length; i++) {
+			certs[cert_files[i]] = {
+				key: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/key.pem'),
+				cert: pkg.fs.readFileSync((cert_folder + cert_files[i] + '/crt.pem') 			
+			};
+			var httpsOptions = {
+
+				SNICallback: function(hostname, cb) {
+				  if (certs[hostname]) {
+					var ctx = tls.createSecureContext(certs[hostname]);
+				  } else {
+					var ctx = tls.createSecureContext(certs['_default'])
+				  }
+				  cb(null, ctx)
+				}
+			};
+			var https_server =  require('https').createServer(httpsOptions, app);
+			https_server.listen(443, function() {
+					console.log('Started server on port 443 at' + new Date() + '');
+			});		       
+		}
 	});
 	    /*
 	//----------- SSL Certificate ----------
