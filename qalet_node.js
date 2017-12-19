@@ -70,3 +70,39 @@ var server = require('http').createServer(app);
 server.listen(port, function() {
 	log.write("/var/log/shusiou_master_reboot.log", 'shusiou master boot up', 'Started server on port ' + port + '!'); 
 });
+
+var https_server =  require('https').createServer(httpsOptions, app);
+
+//----------- SSL Certificate ----------
+	var certs = {
+		"qalet.com": {
+			key: pkg.fs.readFileSync('./cert/www_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('./cert/www_qalet_com_crt.pem') 
+		},  		
+		"www.qalet.com": {
+			key: pkg.fs.readFileSync('./cert/www_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('./cert/www_qalet_com_crt.pem') 
+		},
+		"cdn.qalet.com": {
+			key: pkg.fs.readFileSync('./cert/cdn_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('./cert/cdn_qalet_com_crt.pem') 
+		},			
+		"_default": {
+			key: pkg.fs.readFileSync('./cert/cdn_qalet_com_key.pem'),
+			cert: pkg.fs.readFileSync('./cert/cdn_qalet_com_crt.pem') 
+		} 
+	};
+	var httpsOptions = {
+		SNICallback: function(hostname, cb) {
+		  if (certs[hostname]) {
+			var ctx = tls.createSecureContext(certs[hostname]);
+		  } else {
+			var ctx = tls.createSecureContext(certs['_default'])
+		  }
+		  cb(null, ctx)
+		}
+	};
+
+https_server.listen(443, function() {
+		console.log('Started server on port 443 at' + new Date() + '');
+});
