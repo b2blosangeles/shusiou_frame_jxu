@@ -66,7 +66,7 @@ app.post(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
-var cert_folder = '/var/cert/';
+var cert_folder = '/var/cert/sites/';
 pkg.fs.exists(cert_folder, function(exists) {
     if (exists) {
 	pkg.fs.readdir(cert_folder, function(err, cert_files) {
