@@ -2,6 +2,7 @@ var
 express = require('./package/express/node_modules/express'),   
 bodyParser = require('./package/body-parser/node_modules/body-parser'),
 compression = require('./package/compression/node_modules/compression'),
+tls = require('tls'),   
 app			= express(),
 expireTime	= 604800000,
 port 		= 80;
