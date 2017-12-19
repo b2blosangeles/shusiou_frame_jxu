@@ -74,7 +74,7 @@ pkg.fs.exists(cert_folder, function(exists) {
 		for (var i = 0; i < cert_files.length; i++) {
 			certs[cert_files[i]] = {
 				key: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/key.pem'),
-				cert: pkg.fs.readFileSync((cert_folder + cert_files[i] + '/crt.pem') 			
+				cert: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/crt.pem') 			
 			};
 			var httpsOptions = {
 
