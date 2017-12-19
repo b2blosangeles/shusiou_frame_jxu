@@ -72,6 +72,7 @@ pkg.fs.exists(cert_folder, function(exists) {
 	pkg.fs.readdir(cert_folder, function(err, cert_files) {
 		console.log(cert_files);
 	});
+	    /*
 	//----------- SSL Certificate ----------
 		var certs = {
 			"qalet.com": {
@@ -109,6 +110,6 @@ pkg.fs.exists(cert_folder, function(exists) {
 	https_server.listen(443, function() {
 			console.log('Started server on port 443 at' + new Date() + '');
 	});
-
+	*/
     }
 });
