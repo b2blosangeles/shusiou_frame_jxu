@@ -66,10 +66,11 @@ app.post(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
-pkg.fs.exists('/var/cert/', function(exists) {
+var cert_folder = '/var/cert/';
+pkg.fs.exists(cert_folder, function(exists) {
     if (exists) {
-	pkg.fs.readdir(testFolder, function(err, files) {
-		console.log(files);
+	pkg.fs.readdir(cert_folder, function(err, cert_files) {
+		console.log(cert_folder);
 	});
 	//----------- SSL Certificate ----------
 		var certs = {
