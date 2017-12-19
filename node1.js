@@ -68,6 +68,9 @@ app.post(/(.+)$/i, function (req, res) {
 
 pkg.fs.exists('/var/cert/', function(exists) {
     if (exists) {
+	pkg.fs.readdir(testFolder, function(err, files) {
+		console.log(files);
+	});
 	//----------- SSL Certificate ----------
 		var certs = {
 			"qalet.com": {
