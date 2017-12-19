@@ -70,7 +70,7 @@ var cert_folder = '/var/cert/';
 pkg.fs.exists(cert_folder, function(exists) {
     if (exists) {
 	pkg.fs.readdir(cert_folder, function(err, cert_files) {
-		console.log(cert_folder);
+		console.log(cert_files);
 	});
 	//----------- SSL Certificate ----------
 		var certs = {
