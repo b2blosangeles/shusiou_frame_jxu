@@ -69,7 +69,7 @@ app.post(/(.+)$/i, function (req, res) {
 
 
 //----------- SSL Certificate ----------
-	/*
+
 	var certs = {
 		"qalet.com": {
 			key: pkg.fs.readFileSync('./cert/www_qalet_com_key.pem'),
@@ -88,9 +88,9 @@ app.post(/(.+)$/i, function (req, res) {
 			cert: pkg.fs.readFileSync('./cert/cdn_qalet_com_crt.pem') 
 		} 
 	};
-	*/
+	
 	var httpsOptions = {
-		/*
+		
 		SNICallback: function(hostname, cb) {
 		  if (certs[hostname]) {
 			var ctx = tls.createSecureContext(certs[hostname]);
@@ -99,7 +99,7 @@ app.post(/(.+)$/i, function (req, res) {
 		  }
 		  cb(null, ctx)
 		}
-		*/
+		
 	};
 
 var https_server =  require('https').createServer(httpsOptions, app);
