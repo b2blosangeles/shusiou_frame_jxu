@@ -66,44 +66,45 @@ app.post(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
+pkg.fs.exists('/var/cert/', function(exists) {
+    if (exists) {
+	//----------- SSL Certificate ----------
+		var certs = {
+			"qalet.com": {
+				key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
+				cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
+			},  		
+			"www.qalet.com": {
+				key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
+				cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
+			},
+			"cdn.qalet.com": {
+				key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
+				cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
+			},			
+			"_default": {
+				key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
+				cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
+			} 
+		};
 
+		var httpsOptions = {
 
+			SNICallback: function(hostname, cb) {
+			  if (certs[hostname]) {
+				var ctx = tls.createSecureContext(certs[hostname]);
+			  } else {
+				var ctx = tls.createSecureContext(certs['_default'])
+			  }
+			  cb(null, ctx)
+			}
 
-//----------- SSL Certificate ----------
+		};
 
-	var certs = {
-		"qalet.com": {
-			key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
-		},  		
-		"www.qalet.com": {
-			key: pkg.fs.readFileSync('/var/cert/www_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('/var/cert/www_qalet_com_crt.pem') 
-		},
-		"cdn.qalet.com": {
-			key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
-		},			
-		"_default": {
-			key: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_key.pem'),
-			cert: pkg.fs.readFileSync('/var/cert/cdn_qalet_com_crt.pem') 
-		} 
-	};
-	
-	var httpsOptions = {
-		
-		SNICallback: function(hostname, cb) {
-		  if (certs[hostname]) {
-			var ctx = tls.createSecureContext(certs[hostname]);
-		  } else {
-			var ctx = tls.createSecureContext(certs['_default'])
-		  }
-		  cb(null, ctx)
-		}
-		
-	};
+	var https_server =  require('https').createServer(httpsOptions, app);
+	https_server.listen(443, function() {
+			console.log('Started server on port 443 at' + new Date() + '');
+	});
 
-var https_server =  require('https').createServer(httpsOptions, app);
-https_server.listen(443, function() {
-		console.log('Started server on port 443 at' + new Date() + '');
+    }
 });
