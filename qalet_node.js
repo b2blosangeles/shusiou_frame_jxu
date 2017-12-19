@@ -83,8 +83,7 @@ pkg.fs.exists(cert_folder, function(exists) {
 				key: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/key.pem'),
 				cert: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/crt.pem') 			
 			};
-		}
-		certs['67.205.189.126']	= certs['_default'];	
+		}	
 		var httpsOptions = {
 
 			SNICallback: function(hostname, cb) {
