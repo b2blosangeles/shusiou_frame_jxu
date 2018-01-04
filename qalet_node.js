@@ -13,7 +13,8 @@ var log = new LOG();
 var env = {
 	root_path:__dirname,
 	config_path:'/var/qalet_config',
-	site_path:__dirname + '/site'
+	site_path:__dirname + '/site',
+	site_contents_path:__dirname + '/site_contents'
 };			
 var pkg = {
 	crowdProcess:require('./package/crowdProcess/crowdProcess'),
