@@ -30,6 +30,16 @@
 				} 
 			});				
 		};
+		this.sendCMSFile = function(v) {
+			var me = this, fn = env.site_contents_path + '/' + v;
+			pkg.fs.exists(fn, function(exists) {
+				if (exists) {
+					res.sendFile(fn); 									
+				} else {
+					me.send404(v);					
+				} 
+			});				
+		};
 		
 		this.runApi = function(v) {
 			var me = this;
@@ -122,7 +132,7 @@
 						me.sendPackage(v[2]);
 						break;	
 					case 'cms':
-						me.send("===>"+env.site_contents_path + '/' + v[2]);
+						this.sendCMSFile(v[2]);
 						break;							
 					default:
 						me.send404(p);
