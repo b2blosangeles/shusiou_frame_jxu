@@ -122,7 +122,7 @@
 						me.sendPackage(v[2]);
 						break;	
 					case 'cms':
-						me.sendFile(env.site_contents_path + '/' + v[2]);
+						me.send("===>"+env.site_contents_path + '/' + v[2]);
 						break;							
 					default:
 						me.send404(p);
