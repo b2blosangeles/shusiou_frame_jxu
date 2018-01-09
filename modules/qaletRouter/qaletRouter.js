@@ -108,7 +108,7 @@
 		}
 		this.load = function() {
 			var me = this, p = req.params[0];
-			var patt = new RegExp('/(api|checkip|package)/(.+|)', 'i');
+			var patt = new RegExp('/(api|checkip|package|cms)/(.+|)', 'i');
 			var v = p.match(patt);
 			if ((v) && typeof v == 'object') {
 				switch (v[1]) {
@@ -120,7 +120,10 @@
 						break;	
 					case 'package':
 						me.sendPackage(v[2]);
-						break;						
+						break;	
+					case 'cms':
+						me.sendFile(env.site_contents_path + '/' + v[2]);
+						break;							
 					default:
 						me.send404(p);
 				}		
