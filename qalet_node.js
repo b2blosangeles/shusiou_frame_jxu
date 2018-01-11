@@ -80,10 +80,15 @@ pkg.fs.exists(cert_folder, function(exists) {
 		var certs = {};
 		if (!cert_files.length) return false;
 		for (var i = 0; i < cert_files.length; i++) {
-			certs[cert_files[i]] = {
-				key: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/key.pem'),
-				cert: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/crt.pem') 			
-			};
+			if (pkg.fs.existsSync(cert_folder + cert_files[i] + '/key.pem') &&
+			   	pkg.fs.existsSync(cert_folder + cert_files[i] + '/crt.pem')
+			   ) {
+				certs[cert_files[i]] = {
+					key: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/key.pem'),
+					cert: pkg.fs.readFileSync(cert_folder + cert_files[i] + '/crt.pem') 			
+				};
+			}
+
 		}	
 		var httpsOptions = {
 
