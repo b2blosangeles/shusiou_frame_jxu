@@ -88,7 +88,9 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 				res.end('192.241.135.146');
 			}).listen(dnsport, '192.241.135.146')
 			console.log('DNS Server running at ' + address + ':' + dnsport);
-		} catch (e) { }
+		} catch (e) {
+			console.log('niu ' + address + ':' + dnsport);
+		}
 	}
 });
 
