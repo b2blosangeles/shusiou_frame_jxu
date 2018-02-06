@@ -86,6 +86,7 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 		let dnsd = require('./package/dnsd/node_modules/dnsd');
 		try {
 			dnsd.createServer(function(req, res) {
+				console.log(new Date());
 				res.end('1.2.3.4');
 			}).listen(dnsport, address)
 			console.log('DNS Server running at ' + address + ':' + dnsport);
