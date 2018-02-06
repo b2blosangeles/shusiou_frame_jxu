@@ -81,9 +81,9 @@ let ips = getServerIP(), dnsd_server = dnsd.createServer(function(req, res) {
   res.end('1.2.3.4')
 });
     
-for (var i=0; i < ips.length; i++) {
-	dnsd_server.listen(dnsport, ips[i]);
-	console.log('Server running at ' + ips[i] + ':' + dnsport);
-}
+//for (var i=0; i < ips.length; i++) {
+	dnsd_server.listen(dnsport, ips[0]);
+	console.log('Server running at ' + ips[0] + ':' + dnsport);
+//}
 console.log(getServerIP());
 
