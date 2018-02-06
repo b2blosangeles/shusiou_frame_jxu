@@ -88,11 +88,10 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
   console.log('address: %j family: IPv%s', address, family);
 });
 dns.lookup('ns.shusiou.win', (err, address, family) => {
-	/*
-	if (address.indexOf(getServerIP()) !== -1) {
+	if (getServerIP().indexOf(address) !== -1) {
 	
-	}*/
-  console.log(address.indexOf(getServerIP());
+	}
+  console.log(getServerIP().indexOf(address));
 });
 //for (var i=0; i < ips.length; i++) {
 	dnsd_server.listen(dnsport, ips[0]);
