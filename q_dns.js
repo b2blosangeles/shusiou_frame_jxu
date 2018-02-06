@@ -77,10 +77,13 @@ function getServerIP() {
     return address;
 };
 var dnsd = require('./package/dnsd/node_modules/dnsd');
-dnsd.createServer(function(req, res) {
+let ips = getServerIP(), dnsd_server = dnsd.createServer(function(req, res) {
   res.end('1.2.3.4')
-}).listen(dnsport, '127.0.0.1');
-console.log('Server running at 127.0.0.1:5353');
-
+});
+    
+for (var i=0; i < ips.length; i++) {
+	dnsd_server.listen(dnsport, ips[i]);
+	console.log('Server running at ' + ips[i] + ':' + dnsport);
+}
 console.log(getServerIP());
 
