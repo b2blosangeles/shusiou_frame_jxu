@@ -68,34 +68,25 @@ app.post(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
-function getServerIP() {
-    var ifaces = require('os').networkInterfaces(), address=[];
-    for (var dev in ifaces) {
-        var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
-        for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
-    }
-    return address;
-};
-var dnsd = require('./package/dnsd/node_modules/dnsd');
-let ips = getServerIP(),
-    dns = require('dns'),
+/* ---- DNS Server */
 
-
-dnsd_server = dnsd.createServer(function(req, res) {
-  res.end('1.2.3.4')
-});
+let dns = require('dns'),
 dns.lookup('ns.shusiou.win', (err, address, family) => {
-  console.log('address: %j family: IPv%s', address, family);
-});
-dns.lookup('ns.shusiou.win', (err, address, family) => {
-	if (getServerIP().indexOf(address) !== -1) {
-	
+	function getServerIP() {
+	    var ifaces = require('os').networkInterfaces(), address=[];
+	    for (var dev in ifaces) {
+		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
+		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
+	    }
+	    return address;
+	};	
+	if (getServerIP().indexOf(address) === -1) {
+		let dnsd = require('./package/dnsd/node_modules/dnsd');
+		dnsd.createServer(function(req, res) {
+			res.end('1.2.3.4');
+		}).listen(dnsport, address)
+		console.log('DNS Server running at ' + address + ':' + dnsport);
 	}
-  console.log(getServerIP().indexOf(address));
 });
-//for (var i=0; i < ips.length; i++) {
-	dnsd_server.listen(dnsport, ips[0]);
-	console.log('Server running at ' + ips[0] + ':' + dnsport);
-//}
-console.log(getServerIP());
+
 
