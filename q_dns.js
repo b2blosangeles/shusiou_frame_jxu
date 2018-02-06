@@ -77,10 +77,19 @@ function getServerIP() {
     return address;
 };
 var dnsd = require('./package/dnsd/node_modules/dnsd');
-let ips = getServerIP(), dnsd_server = dnsd.createServer(function(req, res) {
+let ips = getServerIP(),
+    dns = require('dns'),
+
+
+dnsd_server = dnsd.createServer(function(req, res) {
   res.end('1.2.3.4')
 });
-    
+dns.lookup('ns.shusiou.win', (err, address, family) => {
+  console.log('address: %j family: IPv%s', address, family);
+});
+dns.lookup('ns.shusiou.win', (err, address, family) => {
+  console.log('address: %j family: IPv%s', address, family);
+});
 //for (var i=0; i < ips.length; i++) {
 	dnsd_server.listen(dnsport, ips[0]);
 	console.log('Server running at ' + ips[0] + ':' + dnsport);
