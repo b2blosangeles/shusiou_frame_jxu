@@ -83,10 +83,12 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 	};	
 	if (getServerIP().indexOf(address) === -1) {
 		let dnsd = require('./package/dnsd/node_modules/dnsd');
-		dnsd.createServer(function(req, res) {
-			res.end('1.2.3.4');
-		}).listen(dnsport, address)
-		console.log('DNS Server running at ' + address + ':' + dnsport);
+		try {
+			dnsd.createServer(function(req, res) {
+				res.end('1.2.3.4');
+			}).listen(dnsport, address)
+			console.log('DNS Server running at ' + address + ':' + dnsport);
+		} catch (e) { }
 	}
 });
 
