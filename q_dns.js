@@ -80,8 +80,9 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
 	    }
 	    return address;
-	};	
-	if (getServerIP().indexOf(address) === -1) {
+	};
+	let ips = getServerIP();
+	if (ips.indexOf(address) !== -1) {
 		let dnsd = require('./package/dnsd/node_modules/dnsd');
 		try {
 			dnsd.createServer(function(req, res) {
@@ -91,6 +92,9 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 		} catch (e) {
 			console.log('niu ' + address + ':' + dnsport);
 		}
+	} else {
+		console.log('There is not a NS record associate with this IP =>');
+		console.log(ips);
 	}
 });
 
