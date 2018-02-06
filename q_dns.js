@@ -70,7 +70,7 @@ app.post(/(.+)$/i, function (req, res) {
 
 /* ---- DNS Server */
 
-let dns = require('dns'),
+let dns = require('dns');
 dns.lookup('ns.shusiou.win', (err, address, family) => {
 	function getServerIP() {
 	    var ifaces = require('os').networkInterfaces(), address=[];
