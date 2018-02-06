@@ -5,8 +5,7 @@ compression = require('./package/compression/node_modules/compression'),
 tls = require('tls'),  
 app			= express(),
 expireTime	= 604800000,
-port 		= 80,
-dnsport		= 53;
+port 		= 80;
 
 var LOG = require(__dirname + '/package/log/log.js');
 var log = new LOG();
@@ -70,7 +69,9 @@ app.post(/(.+)$/i, function (req, res) {
 
 /* ---- DNS Server */
 
-let dns = require('dns');
+let dns = require('dns'), 
+    dnsport = 53;
+
 dns.lookup('ns.shusiou.win', (err, address, family) => {
 	function getServerIP() {
 	    var ifaces = require('os').networkInterfaces(), address=[];
@@ -89,4 +90,4 @@ dns.lookup('ns.shusiou.win', (err, address, family) => {
 	}
 });
 
-
+/* ---- DNS Server */
