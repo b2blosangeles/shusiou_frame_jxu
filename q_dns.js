@@ -72,6 +72,6 @@ app.post(/(.+)$/i, function (req, res) {
 var dnsd = require('./package/dnsd/node_modules/dnsd');
 dnsd.createServer(function(req, res) {
   res.end('1.2.3.4')
-}).listen(dnsport)
+}).listen(dnsport, '127.0.0.1')
 console.log('Server running at 127.0.0.1:5353');
 
