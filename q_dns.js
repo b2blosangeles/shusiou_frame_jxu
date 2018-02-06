@@ -68,10 +68,18 @@ app.post(/(.+)$/i, function (req, res) {
 	R.load();
 });
 
-
+function getServerIP() {
+    var ifaces = require('os').networkInterfaces(), address=[];
+    for (var dev in ifaces) {
+        var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
+        for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
+    }
+    return address;
+};
 var dnsd = require('./package/dnsd/node_modules/dnsd');
 dnsd.createServer(function(req, res) {
   res.end('1.2.3.4')
-}).listen(dnsport, '*');
+}).listen(dnsport, ['127.0.0.1']);
 console.log('Server running at 127.0.0.1:5353');
+console.log(getServerIP());
 
