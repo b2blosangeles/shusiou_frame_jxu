@@ -72,7 +72,7 @@ app.post(/(.+)$/i, function (req, res) {
 let dns = require('dns'), 
     dnsport = 53;
 
-dns.lookup('ns.shusiou.win', (err, address, family) => {
+dns.lookup('ns1.shusiou.win', (err, address, family) => {
 	function getServerIP() {
 	    var ifaces = require('os').networkInterfaces(), address=[];
 	    for (var dev in ifaces) {
