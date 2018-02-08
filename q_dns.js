@@ -74,7 +74,19 @@ pkg.fs.exists(ddns_path, function(exists) {
 	delete require.cache[ddns_path];
 	let DDNS  = require(ddns_path), ddns = new DDNS();
 	let dns = require('dns'), dnsport = 53;
-	console.log(ddns.build());
+	function getServerIP() {
+	    var ifaces = require('os').networkInterfaces(), address=[];
+	    for (var dev in ifaces) {
+		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
+		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
+	    }
+	    return address;
+	};	
+	dns.lookup('ns1.shusiou.win', (err, address, family) => {
+		console.log(ddns.build());
+		console.log(address);
+	});	
+	
     }
 });
 /*
