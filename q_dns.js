@@ -68,11 +68,11 @@ app.post(/(.+)$/i, function (req, res) {
 });
 
 /* ---- DNS Server */
-
-fs.exists('env.site_path + '/ddns/ddns.js', function(exists) {
+let ddns_path = env.site_path + '/ddns/ddns.js';
+fs.exists(ddns_path, function(exists) {
     if (exists) {
-	delete require.cache[env.site_path + '/ddns/ddns.js'];
-	let ddns  = require(env.site_path + '/ddns/ddns.js);
+	delete require.cache[ddns_path];
+	let ddns  = require(ddns_path);
 	let dns = require('dns'), dnsport = 53;
 	console.log(ddns);
     }
