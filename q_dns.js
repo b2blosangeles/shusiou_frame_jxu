@@ -68,9 +68,20 @@ app.post(/(.+)$/i, function (req, res) {
 });
 
 /* ---- DNS Server */
-
-let dns = require('dns'), 
-    dnsport = 53;
+ fs.readFile('/var/.qalet_cron_watch.data', 'utf8', function(err,ip) {
+      if (err){
+          console.log(ip);
+      } 
+ }
+	     /*
+fs.exists('env.site_path + '/ddns/ddns.js', function(exists) {
+    if (exists) {
+	delete require.cache[env.site_path + '/ddns/ddns.js'];
+	let ddns  = require(env.site_path + '/ddns/ddns.js);
+	let dns = require('dns'), dnsport = 53;
+    }
+});
+ 
 
 //dns.lookup('ns1.shusiou.win', (err, address, family) => {
 	var address = '192.241.135.146';
@@ -86,6 +97,9 @@ let dns = require('dns'),
 	if (ips.indexOf(address) !== -1) {
 		let dnsd = require('./package/dnsd/node_modules/dnsd');
 		try {
+			delete require.cache[env.site_path + '/ddns/ddns.js'];
+			var ddns  = require(env.site_path + '/ddns/ddns.js);
+			
 			dnsd.createServer(function(req, res) {
 				console.log(JSON.stringify(req.question[0].name)+'----------------------------------');
 				console.log(req.connection.remoteAddress + '-' + req.connection.type);
@@ -100,5 +114,5 @@ let dns = require('dns'),
 		console.log(ips);
 	}
 //});
-
+*/
 /* ---- DNS Server */
