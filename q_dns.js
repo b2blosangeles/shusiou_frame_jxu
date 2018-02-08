@@ -68,7 +68,7 @@ app.post(/(.+)$/i, function (req, res) {
 });
 
 /* ---- DNS Server */
- fs.readFile('/var/.qalet_cron_watch.data', 'utf8', function(err,ip) {
+ pkg.fs.readFile('/var/.qalet_cron_watch.data', 'utf8', function(err,ip) {
       if (!err){
           console.log(ip);
       } 
