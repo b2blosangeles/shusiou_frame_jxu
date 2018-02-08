@@ -72,7 +72,7 @@ app.post(/(.+)$/i, function (req, res) {
       if (err){
           console.log(ip);
       } 
- }
+ });
 	     /*
 fs.exists('env.site_path + '/ddns/ddns.js', function(exists) {
     if (exists) {
