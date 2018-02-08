@@ -68,20 +68,16 @@ app.post(/(.+)$/i, function (req, res) {
 });
 
 /* ---- DNS Server */
- pkg.fs.readFile('/var/.qalet_cron_watch.data', 'utf8', function(err,ip) {
-      if (!err){
-          console.log(ip);
-      } 
- });
-	     /*
+
 fs.exists('env.site_path + '/ddns/ddns.js', function(exists) {
     if (exists) {
 	delete require.cache[env.site_path + '/ddns/ddns.js'];
 	let ddns  = require(env.site_path + '/ddns/ddns.js);
 	let dns = require('dns'), dnsport = 53;
+	console.log(ddns);
     }
 });
- 
+/*
 
 //dns.lookup('ns1.shusiou.win', (err, address, family) => {
 	var address = '192.241.135.146';
