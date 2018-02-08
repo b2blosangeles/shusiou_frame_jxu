@@ -87,6 +87,7 @@ dns.lookup('ns1.shusiou.win', (err, address, family) => {
 		try {
 			dnsd.createServer(function(req, res) {
 				console.log(JSON.stringify(req.question[0].name)+'---');
+				console.log(req.question[0].name);
 				res.end('67.205.189.126');
 			}).listen(dnsport, address)
 			console.log('DNS Server running at ' + address + ':' + dnsport);
