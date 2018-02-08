@@ -72,9 +72,9 @@ let ddns_path = env.site_path + '/ddns/ddns.js';
 pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
 	delete require.cache[ddns_path];
-	let ddns  = require(ddns_path);
+	let DDNS  = require(ddns_path), ddns = new DDNS();
 	let dns = require('dns'), dnsport = 53;
-	console.log(ddns);
+	console.log(ddns.build());
     }
 });
 /*
