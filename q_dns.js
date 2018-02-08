@@ -87,8 +87,8 @@ pkg.fs.exists(ddns_path, function(exists) {
 		if (ips.indexOf(address) !== -1) {
 			let dnsd = require('./package/dnsd/node_modules/dnsd');
 			try {
-				delete require.cache[env.site_path + '/ddns/ddns.js'];
-				var ddns  = require(env.site_path + '/ddns/ddns.js);
+				//delete require.cache[env.site_path + '/ddns/ddns.js'];
+				//var ddns  = require(env.site_path + '/ddns/ddns.js);
 
 				dnsd.createServer(function(req, res) {
 					console.log(JSON.stringify(req.question[0].name)+'----------------------------------');
