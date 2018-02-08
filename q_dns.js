@@ -72,7 +72,8 @@ app.post(/(.+)$/i, function (req, res) {
 let dns = require('dns'), 
     dnsport = 53;
 
-dns.lookup('ns1.shusiou.win', (err, address, family) => {
+//dns.lookup('ns1.shusiou.win', (err, address, family) => {
+	var address = '192.241.135.146';
 	function getServerIP() {
 	    var ifaces = require('os').networkInterfaces(), address=[];
 	    for (var dev in ifaces) {
@@ -98,6 +99,6 @@ dns.lookup('ns1.shusiou.win', (err, address, family) => {
 		console.log('There is not a NS record associate with this IP =>');
 		console.log(ips);
 	}
-});
+//});
 
 /* ---- DNS Server */
