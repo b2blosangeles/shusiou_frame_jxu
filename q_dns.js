@@ -71,9 +71,6 @@ app.post(/(.+)$/i, function (req, res) {
 let ddns_path = env.site_path + '/ddns/ddns.js';
 pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
-	delete require.cache[ddns_path];
-	let DDNS  = require(ddns_path), ddns = new DDNS();
-	let dns = require('dns'), dnsport = 53;
 	function getServerIP() {
 	    var ifaces = require('os').networkInterfaces(), address=[];
 	    for (var dev in ifaces) {
@@ -87,13 +84,14 @@ pkg.fs.exists(ddns_path, function(exists) {
 		if (ips.indexOf(address) !== -1) {
 			let dnsd = require('./package/dnsd/node_modules/dnsd');
 			try {
-				//delete require.cache[env.site_path + '/ddns/ddns.js'];
-				//var ddns  = require(env.site_path + '/ddns/ddns.js);
-
+				delete require.cache[ddns_path];
+				let DDNS  = require(ddns_path), ddns = new DDNS();
+				let dns = require('dns'), dnsport = 53;
 				dnsd.createServer(function(req, res) {
-					console.log(JSON.stringify(req.question[0].name)+'----------------------------------');
+					let ip = ddns.getIpByName(req.question[0].name);
+					console.log(ip+'----------------------------------' + req.question[0].name);
 					console.log(req.connection.remoteAddress + '-' + req.connection.type);
-					res.end('192.241.135.146');
+					res.end(ip);
 				}).listen(dnsport, address)
 				console.log('DNS Server running at ' + address + ':' + dnsport);
 			} catch (e) {
