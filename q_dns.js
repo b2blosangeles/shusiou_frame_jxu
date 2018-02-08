@@ -69,7 +69,7 @@ app.post(/(.+)$/i, function (req, res) {
 
 /* ---- DNS Server */
 let ddns_path = env.site_path + '/ddns/ddns.js';
-fs.exists(ddns_path, function(exists) {
+pkg.fs.exists(ddns_path, function(exists) {
     if (exists) {
 	delete require.cache[ddns_path];
 	let ddns  = require(ddns_path);
