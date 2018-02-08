@@ -83,44 +83,28 @@ pkg.fs.exists(ddns_path, function(exists) {
 	    return address;
 	};	
 	dns.lookup('ns1.shusiou.win', (err, address, family) => {
-		console.log(ddns.build());
-		console.log(address);
+		let ips = getServerIP();
+		if (ips.indexOf(address) !== -1) {
+			let dnsd = require('./package/dnsd/node_modules/dnsd');
+			try {
+				delete require.cache[env.site_path + '/ddns/ddns.js'];
+				var ddns  = require(env.site_path + '/ddns/ddns.js);
+
+				dnsd.createServer(function(req, res) {
+					console.log(JSON.stringify(req.question[0].name)+'----------------------------------');
+					console.log(req.connection.remoteAddress + '-' + req.connection.type);
+					res.end('192.241.135.146');
+				}).listen(dnsport, address)
+				console.log('DNS Server running at ' + address + ':' + dnsport);
+			} catch (e) {
+				console.log('niu ' + address + ':' + dnsport);
+			}
+		} else {
+			console.log('There is not a NS record associate with this IP =>');
+			console.log(ips);
+		}
 	});	
 	
     }
 });
-/*
-
-//dns.lookup('ns1.shusiou.win', (err, address, family) => {
-	var address = '192.241.135.146';
-	function getServerIP() {
-	    var ifaces = require('os').networkInterfaces(), address=[];
-	    for (var dev in ifaces) {
-		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
-		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
-	    }
-	    return address;
-	};
-	let ips = getServerIP();
-	if (ips.indexOf(address) !== -1) {
-		let dnsd = require('./package/dnsd/node_modules/dnsd');
-		try {
-			delete require.cache[env.site_path + '/ddns/ddns.js'];
-			var ddns  = require(env.site_path + '/ddns/ddns.js);
-			
-			dnsd.createServer(function(req, res) {
-				console.log(JSON.stringify(req.question[0].name)+'----------------------------------');
-				console.log(req.connection.remoteAddress + '-' + req.connection.type);
-				res.end('67.205.189.126');
-			}).listen(dnsport, address)
-			console.log('DNS Server running at ' + address + ':' + dnsport);
-		} catch (e) {
-			console.log('niu ' + address + ':' + dnsport);
-		}
-	} else {
-		console.log('There is not a NS record associate with this IP =>');
-		console.log(ips);
-	}
-//});
-*/
 /* ---- DNS Server */
