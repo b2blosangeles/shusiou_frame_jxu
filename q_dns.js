@@ -78,15 +78,19 @@ pkg.fs.exists(ddns_path, function(exists) {
 		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
 	    }
 	    return address;
-	};	
+	};
+	let dns = require('dns');
 	dns.lookup('ns1.shusiou.win', (err, address, family) => {
 		let ips = getServerIP();
 		if (ips.indexOf(address) !== -1) {
 			let dnsd = require('./package/dnsd/node_modules/dnsd');
 			try {
 				delete require.cache[ddns_path];
-				let DDNS  = require(ddns_path), ddns = new DDNS();
-				let dns = require('dns'), dnsport = 53;
+				let DDNS  = require(ddns_path), 
+				    ddns = new DDNS(),
+				    dns = require('dns'), 
+				    dnsport = 53;
+				
 				dnsd.createServer(function(req, res) {
 					let ip = ddns.getIpByName(req.question[0].name);
 					console.log(ip+'----------------------------------' + req.question[0].name);
