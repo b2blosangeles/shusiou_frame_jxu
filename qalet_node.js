@@ -130,7 +130,7 @@ pkg.fs.exists(ddns_path, function(exists) {
 				dnsd.createServer(function(req, res) {
 					delete require.cache[ddns_path];
 					let DDNS  = require(ddns_path), 
-					    ddns = new DDNS();				
+					    ddns = new DDNS(env);				
 					
 					ddns.sendRecord(req, res);
 				
