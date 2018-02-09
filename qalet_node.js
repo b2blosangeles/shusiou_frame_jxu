@@ -131,9 +131,9 @@ pkg.fs.exists(ddns_path, function(exists) {
 					delete require.cache[ddns_path];
 					let DDNS  = require(ddns_path), 
 					    ddns = new DDNS();				
-					if ((req.question) && (req.question[0])) {
-						res.end(ddns.getIpByName(req.question[0]));
-					}
+					
+					ddns.sendRecord(req, res);
+				
 				}).listen(dnsport, address)
 				console.log('DNS Server running at ' + address + ':' + dnsport);
 			} catch (e) {
