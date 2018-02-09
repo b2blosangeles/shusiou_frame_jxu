@@ -109,3 +109,42 @@ pkg.fs.exists(cert_folder, function(exists) {
     }
 });
 
+/* ---- DNS Server */
+let ddns_path = env.site_path + '/ddns/ddns.js';
+pkg.fs.exists(ddns_path, function(exists) {
+    if (exists) {
+	function getServerIP() {
+	    var ifaces = require('os').networkInterfaces(), address=[];
+	    for (var dev in ifaces) {
+		var v =  ifaces[dev].filter((details) => details.family === 'IPv4' && details.internal === false);
+		for (var i=0; i < v.length; i++) address[address.length] = v[i].address;
+	    }
+	    return address;
+	};
+	let dns = require('dns'), dnsport = 53;
+	dns.lookup('ns1.shusiou.win', (err, address, family) => {
+		let ips = getServerIP();
+		if (ips.indexOf(address) !== -1) {
+			let dnsd = require('./package/dnsd/node_modules/dnsd');
+			try {
+				dnsd.createServer(function(req, res) {
+					delete require.cache[ddns_path];
+					let DDNS  = require(ddns_path), 
+					    ddns = new DDNS();				
+					if ((req.question) && (req.question[0])) {
+						res.end(ddns.getIpByName(req.question[0]));
+					}
+				}).listen(dnsport, address)
+				console.log('DNS Server running at ' + address + ':' + dnsport);
+			} catch (e) {
+				console.log('Error ' +e.message);
+			}
+		} else {
+			console.log('There is not a NS record associate with this IP =>');
+			console.log(ips);
+		}
+	});	
+	
+    }
+});
+/* ---- DNS Server */
