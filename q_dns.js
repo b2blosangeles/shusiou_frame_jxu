@@ -92,14 +92,13 @@ pkg.fs.exists(ddns_path, function(exists) {
 				    dnsport = 53;
 				
 				dnsd.createServer(function(req, res) {
-					let ip = ddns.getIpByName(req.question[0].name);
-					console.log(ip+'----------------------------------' + req.question[0].name);
-					console.log(req.connection.remoteAddress + '-' + req.connection.type);
-					res.end(ip);
+					if ((req.question) && (req.question[0])) {
+						res.end(ddns.getIpByName(req.question[0]));
+					}
 				}).listen(dnsport, address)
 				console.log('DNS Server running at ' + address + ':' + dnsport);
 			} catch (e) {
-				console.log('niu ' + address + ':' + dnsport);
+				console.log('Error ' +e.message);
 			}
 		} else {
 			console.log('There is not a NS record associate with this IP =>');
