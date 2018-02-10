@@ -125,8 +125,8 @@ pkg.fs.exists(ddns_path, function(exists) {
 	dns.lookup('ns1.shusiou.win', (err, address, family) => {
 		let ips = getServerIP();
 		if (ips.indexOf(address) !== -1) {
-			let dnsd = require('./package/dnsd/node_modules/dnsd');
 			try {
+				let dnsd = require('./package/dnsd/node_modules/dnsd');
 				dnsd.createServer(function(req, res) {
 					delete require.cache[ddns_path];
 					let DDNS  = require(ddns_path), 
