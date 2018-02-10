@@ -137,7 +137,7 @@ pkg.fs.exists(ddns_path, function(exists) {
 				}).listen(dnsport, address)
 				console.log('DNS Server running at ' + address + ':' + dnsport);
 			} catch (e) {
-				console.log('Error ' +e.message);
+				console.log('Error ' +'e.message');
 			}
 		} else {
 			console.log('There is not a NS record associate with this IP =>');
