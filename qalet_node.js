@@ -23,7 +23,7 @@ var pkg = {
 	fs		:require('fs'),
 	exec		:require('child_process').exec			
 };
-
+var ddns_matrix = [];
 
 app.use(bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
