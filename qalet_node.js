@@ -23,7 +23,6 @@ var pkg = {
 	fs		:require('fs'),
 	exec		:require('child_process').exec			
 };
-var ddns_matrix = [];
 
 app.use(bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -125,13 +124,12 @@ pkg.fs.exists(ddns_path, function(exists) {
 	dns.lookup('ns1.shusiou.win', (err, address, family) => {
 		let ips = getServerIP();
 		if (ips.indexOf(address) !== -1) {
+			let dnsd = require('./package/dnsd/node_modules/dnsd');
 			try {
-				let dnsd = require('./package/dnsd/node_modules/dnsd');
 				dnsd.createServer(function(req, res) {
 					delete require.cache[ddns_path];
 					let DDNS  = require(ddns_path), 
 					    ddns = new DDNS(env, address);				
-					
 					ddns.sendRecord(req, res);
 				
 				}).listen(dnsport, address)
