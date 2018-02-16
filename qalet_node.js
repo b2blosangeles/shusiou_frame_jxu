@@ -39,7 +39,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.use(function(req, res, next){
-    res.setTimeout(60000, function(){
+    res.setTimeout(300000, function(){
 		res.writeHead(505, {'Content-Type': 'text/html'});
 		var v = {
 			url:req.protocol + '://' + req.get('host') + req.originalUrl,
