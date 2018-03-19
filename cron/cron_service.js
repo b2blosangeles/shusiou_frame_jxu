@@ -8,6 +8,8 @@ var root_path =  path.join(__dirname, '..');
 var LOG = require(root_path + '/package/log/log.js');
 var log = new LOG();
 
+let _svs_type = ['root', 'master', 'node', 'contents'];
+
 var conf_file = root_path + '/site/cron_service/cron.json';
 
 fs.exists(conf_file, function(exists){
