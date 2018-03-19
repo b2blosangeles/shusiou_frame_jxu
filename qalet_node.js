@@ -14,6 +14,7 @@ var env = {
 	root_path:__dirname,
 	config_path:'/var/qalet_config',
 	site_path:__dirname + '/site',
+	sites_path:__dirname + '/sites',
 	site_contents_path:__dirname + '/site_contents'
 };			
 var pkg = {
