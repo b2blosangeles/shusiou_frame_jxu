@@ -1,5 +1,5 @@
 var CronJobManager = require('./crontab_manager.js');
-var crowdProcess = require('./package/crowdProcess/crowdProcess');
+var CrowdProcess = require('./package/crowdProcess/crowdProcess');
 var manager = new CronJobManager();
 var exec = require('child_process').exec;
 var fs    = require('fs'), path = require('path');
